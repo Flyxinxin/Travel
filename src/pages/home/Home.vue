@@ -27,6 +27,7 @@ export default {
   methods: {
     getHomeInfo(){  //获取ajax数据then返回的是promise对象
       axios.get('/api/index.json').then(this.getHomeInfoSucc);
+      console.log("axios get request start...");
     },
     getHomeInfoSucc(res){
       console.log(res);
