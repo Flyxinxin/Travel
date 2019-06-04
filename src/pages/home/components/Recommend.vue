@@ -2,7 +2,7 @@
   <div>
     <div class="title">热销推荐</div>
     <ul>
-      <li class="item border-bottom" v-for="item of  recommendList" :key="item.id">
+      <li class="item border-bottom" v-for="item of  list" :key="item.id">
           <img class="item-img" :src="item.imgUrl">
         <div class="item-info">
           <p class="item-title">{{item.title}}</p>
@@ -17,30 +17,11 @@
 <script>
 export default {
   name: "HomeRecommend",
-  data() {
-    return {
-      recommendList: [{
-        id:'001',
-        imgUrl: 'http://img1.qunarzz.com/sight/p0/1505/57/579b6c97900745db.water.jpg_200x200_f09770c8.jpg',
-        title: '橘子洲',
-        desc: '橘子洲是个好地方',
-
-      },{
-        id:'002',
-        imgUrl: 'http://img1.qunarzz.com/sight/p0/1905/29/296e5659470d69bea3.img.jpg_200x200_75593f9f.jpg',
-        title: '世界之窗',
-        desc: '世界之窗是个好地方',
-
-      },{
-        id:'003',
-        imgUrl: 'http://img1.qunarzz.com/sight/p0/201403/10/b7aa220089fa8054e6e012bafff63042.jpg_200x200_650160bf.jpg',
-        title: '长沙生态动物园',
-        desc: '长沙生态动物园是个好地方',
-
-      }]
+  props: {
+    list: Array
+  }
     }
-  },
-};
+
 </script>
 
 <style lang="stylus" scoped>

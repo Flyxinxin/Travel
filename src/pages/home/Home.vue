@@ -1,22 +1,22 @@
 <template>
   <div>
-    <home-header></home-header>
-    <home-swiper></home-swiper>
-    <home-icons></home-icons>
-    <home-recommend></home-recommend>
-    <home-weekend></home-weekend>
+    <home-header :city="city"></home-header>
+    <home-swiper :list="swiperList"></home-swiper>
+    <home-icons :list="iconList"></home-icons>
+    <home-recommend :list="recommendList"></home-recommend>
+    <home-weekend :list="weekendList"></home-weekend>
   </div>
 </template>
 
 <script>
-import HomeHeader from './components/Header'
-import HomeSwiper from './components/Swiper'
-import HomeIcons from './components/icons'
-import HomeRecommend from './components/Recommend'
-import HomeWeekend from './components/Weekend'
-import axios from 'axios'
+import HomeHeader from "./components/Header";
+import HomeSwiper from "./components/Swiper";
+import HomeIcons from "./components/icons";
+import HomeRecommend from "./components/Recommend";
+import HomeWeekend from "./components/Weekend";
+import axios from "axios";
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     HomeHeader,
     HomeSwiper,
@@ -24,22 +24,37 @@ export default {
     HomeRecommend,
     HomeWeekend
   },
+  data() {
+    return {
+      city: "",
+      swiperList: [],
+      iconList: [],
+      recommendList: [],
+      weekendList: []
+    };
+  },
   methods: {
-    getHomeInfo(){  //获取ajax数据then返回的是promise对象
-      axios.get('/api/index.json').then(this.getHomeInfoSucc);
-      console.log("axios get request start...");
+    getHomeInfo() {
+      //获取ajax数据then返回的是promise对象
+      axios.get("/api/index.json").then(this.getHomeInfoSucc);
     },
-    getHomeInfoSucc(res){
-      console.log(res);
+    getHomeInfoSucc(res) {
+      res = res.data;
+      if (res.ret && res.data) {
+        const data = res.data;
+        this.city = data.city;
+        this.swiperList = data.swiperList;
+        this.iconList = data.iconList;
+        this.recommendList = data.recommendList;
+        this.weekendList = data.weekendList;
+      }
     }
   },
   mounted() {
     this.getHomeInfo();
-  },
-  
-}
+  }
+};
 </script>
 
 <style>
-
 </style>
